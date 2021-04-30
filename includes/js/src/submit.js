@@ -155,8 +155,12 @@ export default function submit( form, options = {} ) {
 		 */
 
 		form.querySelectorAll( '.wpcf7-response-output' ).forEach( div => {
-			// replaced innerText by innerHTML to add the tag <p></p> in the content
-			div.innerHTML = '<p>' + response.message + '</p>';
+			// We create a <p></p> element
+			var paragraph = document.createElement('p');
+			//We put inside the response.message
+			paragraph.textContent = response.message;
+			// We insert the <p> in the <div>
+			div.appendChild(paragraph);
 		} );
 
 		/** #cf7-tng-end */
