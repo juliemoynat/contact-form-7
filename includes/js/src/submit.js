@@ -45,9 +45,20 @@ export default function submit( form, options = {} ) {
 			);
 		}
 
+		// ! QUATRIEME FONCTION 1/2
+
+		/**
+		 * #cf7-tng-start
+		 *
+		 * .screen-reader-response does not exist anymore.
+		 * See contact-form.php, function screen_reader_response.
+		 */
+
 		// form.wpcf7.parent.querySelector(
 		// 	'.screen-reader-response ul'
 		// ).appendChild( li );
+
+		/** #cf7-tng-end */
 	};
 
 	const setVisualValidationError = error => {
@@ -60,9 +71,6 @@ export default function submit( form, options = {} ) {
 
 		const tip = document.createElement( 'span' );
 		tip.setAttribute( 'class', 'wpcf7-not-valid-tip' );
-		// console.log('deuxième fonction');
-		// console.log(tip);
-
 		tip.setAttribute( 'aria-hidden', 'true' );
 		tip.insertAdjacentText( 'beforeend', error.message );
 		wrap.appendChild( tip );
@@ -123,15 +131,35 @@ export default function submit( form, options = {} ) {
 			response.invalid_fields.forEach( setVisualValidationError );
 		}
 
-		// ! QUATRIEME FONCTION ?
+		// ! QUATRIEME FONCTION 2/2
+
+		/**
+		 * #cf7-tng-start
+		 *
+		 * .screen-reader-response does not exist anymore.
+		 * See contact-form.php, function screen_reader_response.
+		 */
+
 		// form.wpcf7.parent.querySelector(
 		// 	'.screen-reader-response [role="status"]'
 		// ).insertAdjacentText( 'beforeend', response.message );
 
-		// ! TROISIEME FONCTION ?
+		/** #cf7-tng-end */
+
+		// ! TROISIEME FONCTION
+
+		/**
+		 * #cf7-tng-start
+		 *
+		 * Put the message into a HTML paragraph
+		 */
+
 		form.querySelectorAll( '.wpcf7-response-output' ).forEach( div => {
-			div.innerText = response.message;
+			// replaced innerText by innerHTML to add the tag <p></p> in the content
+			div.innerHTML = '<p>' + response.message + '</p>';
 		} );
+
+		/** #cf7-tng-end */
 
 	} ).catch( error => console.error( error ) );
 }
