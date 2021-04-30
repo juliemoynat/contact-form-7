@@ -26,6 +26,8 @@ export default function submit( form, options = {} ) {
 		formData,
 	};
 
+	// ! HUITIEME FONCTION ?
+
 	const setScreenReaderValidationError = error => {
 		const li = document.createElement( 'li' );
 
@@ -47,6 +49,8 @@ export default function submit( form, options = {} ) {
 			'.screen-reader-response ul'
 		).appendChild( li );
 	};
+
+	// ! NEUVIEME FONCTION ?
 
 	const setVisualValidationError = error => {
 		const wrap = form.querySelector( error.into );
@@ -91,6 +95,7 @@ export default function submit( form, options = {} ) {
 
 		if ( [ 'invalid', 'unaccepted', 'spam', 'aborted' ].includes( status ) ) {
 			triggerEvent( form, status, detail );
+			// ! CINQUIEME ET SIXIEME FONCTION Le focus sur le message de submission (fail or sent)
 		} else if ( [ 'sent', 'failed' ].includes( status ) ) {
 			triggerEvent( form, `mail${ status }`, detail );
 		}
@@ -117,10 +122,12 @@ export default function submit( form, options = {} ) {
 			response.invalid_fields.forEach( setVisualValidationError );
 		}
 
+		// ! QUATRIEME FONCTION ?
 		form.wpcf7.parent.querySelector(
 			'.screen-reader-response [role="status"]'
 		).insertAdjacentText( 'beforeend', response.message );
 
+		// ! TROISIEME FONCTION ?
 		form.querySelectorAll( '.wpcf7-response-output' ).forEach( div => {
 			div.innerText = response.message;
 		} );
@@ -140,6 +147,7 @@ apiFetch.use( ( options, next ) => {
 	return next( options );
 } );
 
+// ! HUITIEME FONCTION AUSSI ?
 export const clearResponse = form => {
 	form.wpcf7.parent.querySelector(
 		'.screen-reader-response [role="status"]'
@@ -149,16 +157,19 @@ export const clearResponse = form => {
 		'.screen-reader-response ul'
 	).innerText = '';
 
+	// ! SEPTIEME FONCTION ?
 	form.querySelectorAll( '.wpcf7-not-valid-tip' ).forEach( span => {
 		span.remove();
 	} );
 
 	form.querySelectorAll( '.wpcf7-form-control' ).forEach( control => {
 		control.setAttribute( 'aria-invalid', 'false' );
+		// ! NEUVIEME FONCTION AUSSI ?
 		control.removeAttribute( 'aria-describedby' );
 		control.classList.remove( 'wpcf7-not-valid' );
 	} );
 
+	// ! TROISIEME FONCTION ?
 	form.querySelectorAll( '.wpcf7-response-output' ).forEach( div => {
 		div.innerText = '';
 	} );
