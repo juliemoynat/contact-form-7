@@ -11,7 +11,7 @@ import {
 
 export default function init( form ) {
 
-	console.log('Je suis dans init de contact form !');
+	// console.log('Je suis dans init de contact form !');
 
 	const formData = new FormData( form );
 

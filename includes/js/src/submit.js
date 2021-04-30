@@ -45,12 +45,10 @@ export default function submit( form, options = {} ) {
 			);
 		}
 
-		form.wpcf7.parent.querySelector(
-			'.screen-reader-response ul'
-		).appendChild( li );
+		// form.wpcf7.parent.querySelector(
+		// 	'.screen-reader-response ul'
+		// ).appendChild( li );
 	};
-
-	// ! NEUVIEME FONCTION ?
 
 	const setVisualValidationError = error => {
 		const wrap = form.querySelector( error.into );
@@ -62,6 +60,9 @@ export default function submit( form, options = {} ) {
 
 		const tip = document.createElement( 'span' );
 		tip.setAttribute( 'class', 'wpcf7-not-valid-tip' );
+		// console.log('deuxième fonction');
+		// console.log(tip);
+
 		tip.setAttribute( 'aria-hidden', 'true' );
 		tip.insertAdjacentText( 'beforeend', error.message );
 		wrap.appendChild( tip );
@@ -123,9 +124,9 @@ export default function submit( form, options = {} ) {
 		}
 
 		// ! QUATRIEME FONCTION ?
-		form.wpcf7.parent.querySelector(
-			'.screen-reader-response [role="status"]'
-		).insertAdjacentText( 'beforeend', response.message );
+		// form.wpcf7.parent.querySelector(
+		// 	'.screen-reader-response [role="status"]'
+		// ).insertAdjacentText( 'beforeend', response.message );
 
 		// ! TROISIEME FONCTION ?
 		form.querySelectorAll( '.wpcf7-response-output' ).forEach( div => {
@@ -149,13 +150,13 @@ apiFetch.use( ( options, next ) => {
 
 // ! HUITIEME FONCTION AUSSI ?
 export const clearResponse = form => {
-	form.wpcf7.parent.querySelector(
-		'.screen-reader-response [role="status"]'
-	).innerText = '';
+	// form.wpcf7.parent.querySelector(
+	// 	'.screen-reader-response [role="status"]'
+	// ).innerText = '';
 
-	form.wpcf7.parent.querySelector(
-		'.screen-reader-response ul'
-	).innerText = '';
+	// form.wpcf7.parent.querySelector(
+	// 	'.screen-reader-response ul'
+	// ).innerText = '';
 
 	// ! SEPTIEME FONCTION ?
 	form.querySelectorAll( '.wpcf7-not-valid-tip' ).forEach( span => {
