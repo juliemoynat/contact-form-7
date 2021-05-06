@@ -94,8 +94,13 @@ export default function submit( form, options = {} ) {
 		 */
 
 		if ( control.type == 'file' ) {
-			let newAttribute = control.getAttribute( 'aria-labelledby ') + ' ' + errorID;
-			control.setAttribute( 'aria-labelledby', newAttribute );
+			let newAttribute = control.getAttribute( 'aria-labelledby ');
+			if (newAttribute == null) {
+				control.setAttribute( 'aria-labelledby', errorID );
+			} else {
+				newAttribute = control.getAttribute( 'aria-labelledby ') + ' ' + errorID;
+				control.setAttribute( 'aria-labelledby', newAttribute );
+			}
 		} else {
 			control.setAttribute( 'aria-describedby', errorID );
 		}
