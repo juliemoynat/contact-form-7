@@ -85,6 +85,24 @@ export default function submit( form, options = {} ) {
 
 		/** #cf7-tng-end */
 
+		// ! DEUXIEME FONCTION
+		/**
+		 * #cf7-tng-start
+		 *
+		 * - Retrieve unique ID from error message and add `aria-describedby` to its field
+		 * - For `input[type="file"]`, handle it with `aria-labelledby` instead of `aria-describedby` because of a Firefox + NVDA bug
+		 */
+
+		if ( control.type == 'file' ) {
+			let newAttribute = control.getAttribute( 'aria-labelledby ') + ' ' + errorID;
+			control.setAttribute( 'aria-labelledby', newAttribute );
+		} else {
+			control.setAttribute( 'aria-describedby', errorID );
+		}
+
+
+		/** #cf7-tng-end */
+
 		tip.insertAdjacentText( 'beforeend', error.message );
 		wrap.appendChild( tip );
 
@@ -97,8 +115,6 @@ export default function submit( form, options = {} ) {
 				tip.setAttribute( 'style', 'display: none' );
 			} );
 		}
-
-		// ! DEUXIEME FONCTION
 	};
 
 	apiFetch( {
@@ -237,17 +253,17 @@ export const clearResponse = form => {
 		// console.log(field);
 
 		if( field.getAttribute('type') == 'file' ) {
-			console.log(field);
+			// console.log(field);
 
 			let IDs = field.getAttribute( 'aria-labelledby' );
-			console.log('IDs', IDs)
+			// console.log('IDs', IDs)
 			IDs = IDs.split( ' ' );
-			console.log('IDs split', IDs)
+			// console.log('IDs split', IDs)
 
 			IDs = IDs.filter( function ( ID ) {
 				return !/^cf7-tng-error-*/.test( ID );
 			});
-			console.log('IDs filter', IDs)
+			// console.log('IDs filter', IDs)
 
 			field.setAttribute( 'aria-labelledby', IDs.join( ' ' ) );
 
