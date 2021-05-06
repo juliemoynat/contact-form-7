@@ -32,7 +32,7 @@ export default function init( form ) {
 		);
 	} );
 
-	// ! PREMIERE FONCTION
+	// ! PREMIERE FONCTION DONE
 
 	/**
 	 * #cf7-tng-start
@@ -81,8 +81,8 @@ export default function init( form ) {
 				field.setAttribute( 'aria-labelledby', label.id );
 
 				// Now the label and the field are linked
-				console.log(label);
-				console.log(field);
+				// console.log(label);
+				// console.log(field);
 			}
 		}
 	})

@@ -146,21 +146,26 @@ export default function submit( form, options = {} ) {
 
 		/** #cf7-tng-end */
 
-		// ! TROISIEME FONCTION
+		// ! TROISIEME / CINQUIEME / SIXIEME FONCTIONS
 
 		/**
 		 * #cf7-tng-start
 		 *
-		 * Put the message into a HTML paragraph
+		 * 3rd : Put the message into a HTML paragraph
+		 *
+		 * 5th/6th : move focus on every type of message after submit (confirmation, error, warning)
 		 */
 
 		form.querySelectorAll( '.wpcf7-response-output' ).forEach( div => {
 			// We create a <p></p> element
 			var paragraph = document.createElement('p');
-			//We put inside the response.message
+			// We put inside the response.message
 			paragraph.textContent = response.message;
 			// We insert the <p> in the <div>
 			div.appendChild(paragraph);
+			// We move the focus on the message after submission
+			// whatever the type of message
+			div.focus();
 		} );
 
 		/** #cf7-tng-end */
@@ -182,6 +187,14 @@ apiFetch.use( ( options, next ) => {
 
 // ! HUITIEME FONCTION AUSSI ?
 export const clearResponse = form => {
+
+	/**
+	 * #cf7-tng-start
+	 *
+	 * .screen-reader-response does not exist anymore.
+	 * See contact-form.php, function screen_reader_response.
+	 */
+
 	// form.wpcf7.parent.querySelector(
 	// 	'.screen-reader-response [role="status"]'
 	// ).innerText = '';
@@ -189,6 +202,8 @@ export const clearResponse = form => {
 	// form.wpcf7.parent.querySelector(
 	// 	'.screen-reader-response ul'
 	// ).innerText = '';
+
+	/** #cf7-tng-end */
 
 	// ! SEPTIEME FONCTION ?
 	form.querySelectorAll( '.wpcf7-not-valid-tip' ).forEach( span => {
