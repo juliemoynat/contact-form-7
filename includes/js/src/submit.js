@@ -26,8 +26,6 @@ export default function submit( form, options = {} ) {
 		formData,
 	};
 
-	// ! HUITIEME FONCTION ?
-
 	const setScreenReaderValidationError = error => {
 		const li = document.createElement( 'li' );
 
@@ -69,9 +67,24 @@ export default function submit( form, options = {} ) {
 		control.setAttribute( 'aria-invalid', 'true' );
 		control.setAttribute( 'aria-describedby', error.error_id );
 
+		// ! SEPTIEME FONCTION
+		/**
+		 * #cf7-tng-start
+		 *
+		 * - Comment `role="alert" aria-hidden="true"` from the span element.
+		 * - Create errorID for random unique ID, and attach errorID to the error message.
+		 */
+
+		let errorID = 'cf7-tng-error' + Math.random().toString(36).substr(2, 9);
+
 		const tip = document.createElement( 'span' );
 		tip.setAttribute( 'class', 'wpcf7-not-valid-tip' );
-		tip.setAttribute( 'aria-hidden', 'true' );
+
+		// tip.setAttribute( 'aria-hidden', 'true' );
+		tip.setAttribute( 'id', errorID );
+
+		/** #cf7-tng-end */
+
 		tip.insertAdjacentText( 'beforeend', error.message );
 		wrap.appendChild( tip );
 
@@ -185,7 +198,7 @@ apiFetch.use( ( options, next ) => {
 	return next( options );
 } );
 
-// ! HUITIEME FONCTION AUSSI ?
+// ! HUITIEME FONCTION DONE
 export const clearResponse = form => {
 
 	/**
@@ -205,7 +218,6 @@ export const clearResponse = form => {
 
 	/** #cf7-tng-end */
 
-	// ! SEPTIEME FONCTION ?
 	form.querySelectorAll( '.wpcf7-not-valid-tip' ).forEach( span => {
 		span.remove();
 	} );
@@ -217,7 +229,6 @@ export const clearResponse = form => {
 		control.classList.remove( 'wpcf7-not-valid' );
 	} );
 
-	// ! TROISIEME FONCTION ?
 	form.querySelectorAll( '.wpcf7-response-output' ).forEach( div => {
 		div.innerText = '';
 	} );
