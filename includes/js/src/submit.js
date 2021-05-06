@@ -222,12 +222,47 @@ export const clearResponse = form => {
 		span.remove();
 	} );
 
+	// ! NEUVIEME FONCTION
+	/**
+	 * #cf7-tng-start
+	 * - Remove aria-describedby if not needed
+	 * - Remove the error message ID from the `aria-labelledby` attribute for `input[type="file"]`
+	 */
+
+	let cf7_tng_fields_ok = form.querySelectorAll( '.wpcf7-form-control' );
+	// console.log(cf7_tng_fields_ok);
+
+	cf7_tng_fields_ok.forEach(field => {
+		// console.log(field);
+
+		if( field.getAttribute('type') == 'file' ) {
+			console.log(field);
+
+			let IDs = field.getAttribute( 'aria-labelledby' );
+			console.log('IDs', IDs)
+			IDs = IDs.split( ' ' );
+			console.log('IDs split', IDs)
+
+			IDs = IDs.filter( function ( ID ) {
+				return !/^cf7-tng-error-*/.test( ID );
+			});
+			console.log('IDs filter', IDs)
+
+			field.setAttribute( 'aria-labelledby', IDs.join( ' ' ) );
+		}
+		// } else {
+
+		// 	field.removeAttribute( 'aria-describedby' );
+		// }
+	})
+
 	form.querySelectorAll( '.wpcf7-form-control' ).forEach( control => {
+
 		control.setAttribute( 'aria-invalid', 'false' );
-		// ! NEUVIEME FONCTION AUSSI ?
-		control.removeAttribute( 'aria-describedby' );
+		// control.removeAttribute( 'aria-describedby' );
 		control.classList.remove( 'wpcf7-not-valid' );
 	} );
+	/** #cf7-tng-end */
 
 	form.querySelectorAll( '.wpcf7-response-output' ).forEach( div => {
 		div.innerText = '';
