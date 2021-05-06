@@ -75,7 +75,7 @@ export default function submit( form, options = {} ) {
 		 * - Create errorID for random unique ID, and attach errorID to the error message.
 		 */
 
-		let errorID = 'cf7-tng-error' + Math.random().toString(36).substr(2, 9);
+		let errorID = 'cf7-tng-error-' + Math.random().toString(36).substr(2, 9);
 
 		const tip = document.createElement( 'span' );
 		tip.setAttribute( 'class', 'wpcf7-not-valid-tip' );
@@ -97,6 +97,8 @@ export default function submit( form, options = {} ) {
 				tip.setAttribute( 'style', 'display: none' );
 			} );
 		}
+
+		// ! DEUXIEME FONCTION
 	};
 
 	apiFetch( {
@@ -117,7 +119,6 @@ export default function submit( form, options = {} ) {
 
 		if ( [ 'invalid', 'unaccepted', 'spam', 'aborted' ].includes( status ) ) {
 			triggerEvent( form, status, detail );
-			// ! CINQUIEME ET SIXIEME FONCTION Le focus sur le message de submission (fail or sent)
 		} else if ( [ 'sent', 'failed' ].includes( status ) ) {
 			triggerEvent( form, `mail${ status }`, detail );
 		}
@@ -249,11 +250,11 @@ export const clearResponse = form => {
 			console.log('IDs filter', IDs)
 
 			field.setAttribute( 'aria-labelledby', IDs.join( ' ' ) );
-		}
-		// } else {
 
-		// 	field.removeAttribute( 'aria-describedby' );
-		// }
+		} else {
+
+			field.removeAttribute( 'aria-describedby' );
+		}
 	})
 
 	form.querySelectorAll( '.wpcf7-form-control' ).forEach( control => {
