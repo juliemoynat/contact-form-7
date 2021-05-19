@@ -94,13 +94,7 @@ export default function submit( form, options = {} ) {
 		 */
 
 		if ( control.type == 'file' ) {
-			let newAttribute = control.getAttribute( 'aria-labelledby ');
-			if (newAttribute == null) {
-				control.setAttribute( 'aria-labelledby', errorID );
-			} else {
-				newAttribute = control.getAttribute( 'aria-labelledby ') + ' ' + errorID;
-				control.setAttribute( 'aria-labelledby', newAttribute );
-			}
+			control.setAttribute( 'aria-labelledby', control.getAttribute( 'aria-labelledby') + ' ' + errorID );
 		} else {
 			control.setAttribute( 'aria-describedby', errorID );
 		}
@@ -251,13 +245,9 @@ export const clearResponse = form => {
 	 * - Remove the error message ID from the `aria-labelledby` attribute for `input[type="file"]`
 	 */
 
-	let cf7_tng_fields_ok = form.querySelectorAll( '.wpcf7-form-control' );
-	// console.log(cf7_tng_fields_ok);
+	form.querySelectorAll( '.wpcf7-form-control' ).forEach( control => {
 
-	cf7_tng_fields_ok.forEach(field => {
-		// console.log(field);
-
-		if( field.getAttribute('type') == 'file' ) {
+		if( control.getAttribute('type') == 'file' ) {
 			// console.log(field);
 
 			let IDs = field.getAttribute( 'aria-labelledby' );
@@ -270,15 +260,12 @@ export const clearResponse = form => {
 			});
 			// console.log('IDs filter', IDs)
 
-			field.setAttribute( 'aria-labelledby', IDs.join( ' ' ) );
+			control.setAttribute( 'aria-labelledby', IDs.join( ' ' ) );
 
 		} else {
 
-			field.removeAttribute( 'aria-describedby' );
+			control.removeAttribute( 'aria-describedby' );
 		}
-	})
-
-	form.querySelectorAll( '.wpcf7-form-control' ).forEach( control => {
 
 		control.setAttribute( 'aria-invalid', 'false' );
 		// control.removeAttribute( 'aria-describedby' );
