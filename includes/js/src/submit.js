@@ -67,8 +67,6 @@ export default function submit( form, options = {} ) {
 		control.setAttribute( 'aria-invalid', 'true' );
 		control.setAttribute( 'aria-describedby', error.error_id );
 
-		let errorID = 'cf7-tng-error-' + Math.random().toString(36).substr(2, 9);
-
 		const tip = document.createElement( 'span' );
 		tip.setAttribute( 'class', 'wpcf7-not-valid-tip' );
 
@@ -79,6 +77,8 @@ export default function submit( form, options = {} ) {
 		 * - Comment `role="alert" aria-hidden="true"` from the span element.
 		 * - Create errorID for random unique ID, and attach errorID to the error message.
 		 */
+
+		let errorID = 'cf7-tng-error-' + Math.random().toString(36).substr(2, 9);
 
 		// tip.setAttribute( 'aria-hidden', 'true' );
 		tip.setAttribute( 'id', errorID );
@@ -250,7 +250,7 @@ export const clearResponse = form => {
 		if( control.getAttribute('type') == 'file' ) {
 			// console.log(field);
 
-			let IDs = field.getAttribute( 'aria-labelledby' );
+			let IDs = control.getAttribute( 'aria-labelledby' );
 			// console.log('IDs', IDs)
 			IDs = IDs.split( ' ' );
 			// console.log('IDs split', IDs)
