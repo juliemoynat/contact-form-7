@@ -261,10 +261,6 @@ export const clearResponse = form => {
 			// console.log('IDs filter', IDs)
 
 			control.setAttribute( 'aria-labelledby', IDs.join( ' ' ) );
-
-		} else {
-
-			control.removeAttribute( 'aria-describedby' );
 		}
 
 		control.setAttribute( 'aria-invalid', 'false' );
