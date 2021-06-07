@@ -43,8 +43,6 @@ export default function submit( form, options = {} ) {
 			);
 		}
 
-		// ! QUATRIEME FONCTION 1/2
-
 		/**
 		 * #cf7-tng-start
 		 *
@@ -70,7 +68,6 @@ export default function submit( form, options = {} ) {
 		const tip = document.createElement( 'span' );
 		tip.setAttribute( 'class', 'wpcf7-not-valid-tip' );
 
-		// ! SEPTIEME FONCTION
 		/**
 		 * #cf7-tng-start
 		 *
@@ -85,7 +82,6 @@ export default function submit( form, options = {} ) {
 
 		/** #cf7-tng-end */
 
-		// ! DEUXIEME FONCTION
 		/**
 		 * #cf7-tng-start
 		 *
@@ -94,11 +90,10 @@ export default function submit( form, options = {} ) {
 		 */
 
 		if ( control.type == 'file' ) {
-			control.setAttribute( 'aria-labelledby', control.getAttribute( 'aria-labelledby') + ' ' + errorID );
+			control.setAttribute( 'aria-labelledby', control.getAttribute( 'aria-labelledby' ) + ' ' + errorID );
 		} else {
 			control.setAttribute( 'aria-describedby', errorID );
 		}
-
 
 		/** #cf7-tng-end */
 
@@ -160,8 +155,6 @@ export default function submit( form, options = {} ) {
 			response.invalid_fields.forEach( setVisualValidationError );
 		}
 
-		// ! QUATRIEME FONCTION 2/2
-
 		/**
 		 * #cf7-tng-start
 		 *
@@ -175,7 +168,6 @@ export default function submit( form, options = {} ) {
 
 		/** #cf7-tng-end */
 
-		// ! TROISIEME / CINQUIEME / SIXIEME FONCTIONS
 
 		/**
 		 * #cf7-tng-start
@@ -186,14 +178,9 @@ export default function submit( form, options = {} ) {
 		 */
 
 		form.querySelectorAll( '.wpcf7-response-output' ).forEach( div => {
-			// We create a <p></p> element
-			var paragraph = document.createElement('p');
-			// We put inside the response.message
+			var paragraph = document.createElement( 'p' );
 			paragraph.textContent = response.message;
-			// We insert the <p> in the <div>
-			div.appendChild(paragraph);
-			// We move the focus on the message after submission
-			// whatever the type of message
+			div.appendChild( paragraph );
 			div.focus();
 		} );
 
@@ -214,7 +201,6 @@ apiFetch.use( ( options, next ) => {
 	return next( options );
 } );
 
-// ! HUITIEME FONCTION DONE
 export const clearResponse = form => {
 
 	/**
@@ -238,36 +224,31 @@ export const clearResponse = form => {
 		span.remove();
 	} );
 
-	// ! NEUVIEME FONCTION
-	/**
-	 * #cf7-tng-start
-	 * - Remove aria-describedby if not needed
-	 * - Remove the error message ID from the `aria-labelledby` attribute for `input[type="file"]`
-	 */
 
 	form.querySelectorAll( '.wpcf7-form-control' ).forEach( control => {
 
-		if( control.getAttribute('type') == 'file' ) {
-			// console.log(field);
+		/**
+		 * #cf7-tng-start
+		 *
+		 * - Remove the error message ID from the `aria-labelledby` attribute for `input[type="file"]`
+		 */
 
+		if( control.getAttribute( 'type' ) == 'file' ) {
 			let IDs = control.getAttribute( 'aria-labelledby' );
-			// console.log('IDs', IDs)
 			IDs = IDs.split( ' ' );
-			// console.log('IDs split', IDs)
-
 			IDs = IDs.filter( function ( ID ) {
 				return !/^cf7-tng-error-*/.test( ID );
 			});
-			// console.log('IDs filter', IDs)
 
 			control.setAttribute( 'aria-labelledby', IDs.join( ' ' ) );
 		}
 
+		/** #cf7-tng-end */
+
 		control.setAttribute( 'aria-invalid', 'false' );
-		// control.removeAttribute( 'aria-describedby' );
+		control.removeAttribute( 'aria-describedby' );
 		control.classList.remove( 'wpcf7-not-valid' );
 	} );
-	/** #cf7-tng-end */
 
 	form.querySelectorAll( '.wpcf7-response-output' ).forEach( div => {
 		div.innerText = '';
