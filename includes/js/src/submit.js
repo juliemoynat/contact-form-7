@@ -87,10 +87,12 @@ export default function submit( form, options = {} ) {
 		 *
 		 * - Retrieve unique ID from error message and add `aria-describedby` to its field
 		 * - For `input[type="file"]`, handle it with `aria-labelledby` instead of `aria-describedby` because of a Firefox + NVDA bug
+		 * - Delete attribute aria-describedby for `input[type="file"]`
 		 */
 
 		if ( control.type == 'file' ) {
 			control.setAttribute( 'aria-labelledby', control.getAttribute( 'aria-labelledby' ) + ' ' + errorID );
+			control.removeAttribute( 'aria-describedby' );
 		} else {
 			control.setAttribute( 'aria-describedby', errorID );
 		}
