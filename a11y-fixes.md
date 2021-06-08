@@ -6,7 +6,7 @@ A fork of the Contact Form 7 WordPress plugin to fix accessibility problems
 
 This repository is the Tanaguru team's version of the WordPress Plugin [Contact Form 7](https://wordpress.org/plugins/contact-form-7/) by Takayuki Miyoshi and modified by Tanaguru team.
 
-CF7 Tanaguru is still in progress as of today (June 2020).
+CF7 Tanaguru is still in progress as of today (June 2021).
 
 ## Who are we? Why this plugin?
 
@@ -106,18 +106,7 @@ This was a little bit complicated because we needed to link the `<label>` of the
 
 We try to stay close to the evolving changes of the original plugin. Therefore we have to manually update this repository.
 
-### Cautions
-
-If you have installed the plugin on a website, follow these instructions to make it easier to maintain and update this custom plugin:
-
-* Install the original Contact Form 7 plugin;
-* Check that the original plugin is disabled. If not, disable it. This allows us to see in the WordPress back-office when an update is available for the original plugin.
-
-### One branch = one fix
-
-Create a Git branch by fix you want to do. Name this branch following this model: `[version]_name-of-the-fix`.
-
-Example : `5-1-1_error-role-alert`
+This repository is a fork from the original plugin. We are doing all the work on the `a11y-fixes` branch so that we will be able to send small pull requests via other branches afterwards.
 
 ### Using specific comment tags
 
@@ -159,10 +148,37 @@ For example, this could look like this (this example is not taken from the origi
 Follow these instructions to update the CF7 Tanaguru plugin from the official Contact Form 7:
 
 1. Check that the `master` branch is up to date on your computer;
-1. Create a new branch, from the `master` branch, naming `update_[version]` replacing “version” by the new version number of Contact Form 7. Example : `update_5-1-2`;
-1. Put the new version from the official Contact Form 7 on this branch;
-1. Before committing this, compare what you are about to commit and report all CF7 Tanaguru modifications on the new version of Contact Form 7;
-1. When everything seems to be OK, commit and push your modifications on your branch `update_[version]`;
-1. Go on Github and make a Pull Request to merge your branch `update_[version]` on `master`. Read your Pull Request carefully. If you can, request a review from a colleague to benefit from a fresh eyes looking;
-1. Approve the Pull Request;
-1. Make a Github Release.
+1. Check that the `master` branch is up to date from the forked repository. Github is telling you this information in the interface. If it's not up to date, [rebase it](https://stackoverflow.com/a/7244456):
+	```
+	# Add the remote, call it "upstream" (only the first time you do it):
+
+	git remote add upstream https://github.com/whoever/whatever.git
+
+	# Fetch all the branches of that remote into remote-tracking branches:
+
+	git fetch upstream
+
+	# Make sure that you're on your master branch:
+
+	git checkout master
+
+	# Rewrite your master branch so that any commits of yours that
+	# aren't already in upstream/master are replayed on top of that
+	# other branch:
+
+	git rebase upstream/master
+
+	# Push it
+
+	git push
+	```
+1. Checkout `a11y-fixes` branch;
+1. Rebase this branch from `master` (or merge `master` into it) and push;
+1. Test it.
+1. Fix the version number of the plugin into the `wp-contact-form-7.php` file:
+	1. In the comment block at the top of the file, modify the "Version:" line;
+	1. Keep the officiel version number of Contact Form 7;
+	1. Add a suffix number : "-a11y.x" (where "x" is an incremental number).
+1. Make a Github Release from the `a11y-fixes` branch.
+
+Do not merge `a11y-fixes` branch into `master`.

@@ -1,13 +1,13 @@
 <?php
 /*
-Plugin Name: Contact Form 7
+Plugin Name: Contact Form 7 - Tanaguru
 Plugin URI: https://contactform7.com/
 Description: Just another contact form plugin. Simple but flexible.
-Author: Takayuki Miyoshi
+Author: Takayuki Miyoshi / Tanaguru
 Author URI: https://ideasilo.wordpress.com/
 Text Domain: contact-form-7
 Domain Path: /languages/
-Version: 5.4.1
+Version: 5.4.1-a11y.1
 */
 
 define( 'WPCF7_VERSION', '5.4.1' );

@@ -57,7 +57,7 @@ export default function init( form ) {
 	})
 
 	/**
-	 * #cf7-tng-stop
+	 * #cf7-tng-end
 	 */
 
 	exclusiveCheckboxHelper( form );
