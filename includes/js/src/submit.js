@@ -148,6 +148,15 @@ export default function submit( form, options = {} ) {
 		}
 
 		if ( 'mail_sent' === response.status ) {
+
+			/**
+			 * #cf7-tng-start
+			 *
+			 * move focus on confirmation message after submit and before reset
+			 */
+			form.querySelector( '.wpcf7-response-output' ).focus();
+			/** #cf7-tng-end */
+
 			form.reset();
 			form.wpcf7.resetOnMailSent = true;
 		}
