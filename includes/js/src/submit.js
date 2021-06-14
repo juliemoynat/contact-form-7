@@ -71,7 +71,7 @@ export default function submit( form, options = {} ) {
 		/**
 		 * #cf7-tng-start
 		 *
-		 * - Comment `role="alert" aria-hidden="true"` from the span element.
+		 * - Comment `aria-hidden="true"` from the span element.
 		 * - Create errorID for random unique ID, and attach errorID to the error message.
 		 */
 
@@ -152,7 +152,7 @@ export default function submit( form, options = {} ) {
 			/**
 			 * #cf7-tng-start
 			 *
-			 * move focus on confirmation message after submit and before reset
+			 * Move focus on confirmation message after submit and before reset
 			 */
 			form.querySelector( '.wpcf7-response-output' ).focus();
 			/** #cf7-tng-end */
@@ -183,9 +183,8 @@ export default function submit( form, options = {} ) {
 		/**
 		 * #cf7-tng-start
 		 *
-		 * 3rd : Put the message into a HTML paragraph
-		 *
-		 * 5th/6th : move focus on every type of message after submit (confirmation, error, warning)
+		 * - Put the message into a HTML paragraph
+		 * - Move focus on every type of message after submit (error, warning)
 		 */
 
 		form.querySelectorAll( '.wpcf7-response-output' ).forEach( div => {
@@ -241,7 +240,7 @@ export const clearResponse = form => {
 		/**
 		 * #cf7-tng-start
 		 *
-		 * - Remove the error message ID from the `aria-labelledby` attribute for `input[type="file"]`
+		 * Remove the error message ID from the `aria-labelledby` attribute for `input[type="file"]`
 		 */
 
 		if( control.getAttribute( 'type' ) == 'file' ) {
