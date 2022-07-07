@@ -2,9 +2,9 @@
 Contributors: takayukister
 Donate link: https://contactform7.com/donate/
 Tags: contact, form, contact form, feedback, email, ajax, captcha, akismet, multilingual
-Requires at least: 5.5
-Tested up to: 5.7
-Stable tag: 5.4
+Requires at least: 5.9
+Tested up to: 6.0
+Stable tag: 5.5.6.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ Contact Form 7 can manage multiple contact forms, plus you can customize the for
 
 = Docs and support =
 
-You can find [docs](https://contactform7.com/docs/), [FAQ](https://contactform7.com/faq/) and more detailed information about Contact Form 7 on [contactform7.com](https://contactform7.com/). When you can't find the answer to your question on the FAQ or in any of the documentation, check the [support forum](https://wordpress.org/support/plugin/contact-form-7/) on WordPress.org. If you can't locate any topics that pertain to your particular issue, post a new topic for it.
+You can find [docs](https://contactform7.com/docs/), [FAQ](https://contactform7.com/faq/) and more detailed information about Contact Form 7 on [contactform7.com](https://contactform7.com/). When you cannot find the answer to your question on the FAQ or in any of the documentation, check the [support forum](https://wordpress.org/support/plugin/contact-form-7/) on WordPress.org. If you cannot locate any topics that pertain to your particular issue, post a new topic for it.
 
 = Contact Form 7 needs your support =
 
@@ -37,13 +37,14 @@ If you activate certain features in this plugin, the contact form submitter's pe
 * Akismet ([Automattic](https://automattic.com/privacy/))
 * Constant Contact ([Endurance International Group](https://www.endurance.com/privacy))
 * [Sendinblue](https://www.sendinblue.com/legal/privacypolicy/)
+* [Stripe](https://stripe.com/privacy)
 
 = Recommended plugins =
 
 The following plugins are recommended for Contact Form 7 users:
 
 * [Flamingo](https://wordpress.org/plugins/flamingo/) by Takayuki Miyoshi - With Flamingo, you can save submitted messages via contact forms in the database.
-* [Bogo](https://wordpress.org/plugins/bogo/) by Takayuki Miyoshi - Bogo is a straight-forward multilingual plugin that doesn't cause headaches.
+* [Bogo](https://wordpress.org/plugins/bogo/) by Takayuki Miyoshi - Bogo is a straight-forward multilingual plugin that does not cause headaches.
 
 = Translations =
 
@@ -76,12 +77,38 @@ Do you have questions or issues with Contact Form 7? Use these support channels 
 
 For more information, see [Releases](https://contactform7.com/category/releases/).
 
-= 5.4.1 =
+= 5.6 =
 
-[https://contactform7.com/contact-form-7-541/](https://contactform7.com/contact-form-7-541/)
+[https://contactform7.com/contact-form-7-56/](https://contactform7.com/contact-form-7-56/)
 
-= 5.4 =
+= 5.5.6 =
 
-[https://contactform7.com/contact-form-7-54/](https://contactform7.com/contact-form-7-54/)
+[https://contactform7.com/contact-form-7-556/](https://contactform7.com/contact-form-7-556/)
+
+= 5.5.5 =
+
+[https://contactform7.com/contact-form-7-555/](https://contactform7.com/contact-form-7-555/)
+
+= 5.5.4 =
+
+[https://contactform7.com/contact-form-7-554/](https://contactform7.com/contact-form-7-554/)
+
+= 5.5.3 =
+
+[https://contactform7.com/contact-form-7-553/](https://contactform7.com/contact-form-7-553/)
+
+= 5.5.2 =
+
+* REST API: Removes argument schema reference that causes error when the form has 'id' field.
+* Changes method names that are reserved in PHP 5.6.
+
+= 5.5.1 =
+
+* Fixed: Reserved keyword was used in PHP class constant name.
+* Fixed: Uncaught TypeError on `in_array()` call.
+
+= 5.5 =
+
+[https://contactform7.com/contact-form-7-55/](https://contactform7.com/contact-form-7-55/)
 
 == Upgrade Notice ==

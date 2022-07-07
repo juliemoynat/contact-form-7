@@ -1,5 +1,6 @@
 import { absInt } from './utils';
 import { resetCaptcha, resetQuiz } from './reset';
+import { apiFetch } from './api-fetch';
 
 import {
 	exclusiveCheckboxHelper,
@@ -21,12 +22,13 @@ export default function init( form ) {
 		unitTag: formData.get( '_wpcf7_unit_tag' ),
 		containerPost: absInt( formData.get( '_wpcf7_container_post' ) ),
 		parent: form.closest( '.wpcf7' ),
+		schema: {},
 	};
 
-	form.querySelectorAll( '.wpcf7-submit' ).forEach( element => {
+	form.querySelectorAll( '.has-spinner' ).forEach( element => {
 		element.insertAdjacentHTML(
 			'afterend',
-			'<span class="ajax-loader"></span>'
+			'<span class="wpcf7-spinner"></span>'
 		);
 	} );
 
@@ -80,9 +82,7 @@ export default function init( form ) {
 	} );
 
 	form.addEventListener( 'submit', event => {
-		const submitter = event.submitter;
-		wpcf7.submit( form, { submitter } );
-
+		wpcf7.submit( form, { submitter: event.submitter } );
 		event.preventDefault();
 	} );
 
@@ -103,6 +103,19 @@ export default function init( form ) {
 
 		if ( event.detail.apiResponse.quiz ) {
 			resetQuiz( form, event.detail.apiResponse.quiz );
+		}
+	} );
+
+	apiFetch( {
+		endpoint: `contact-forms/${ form.wpcf7.id }/feedback/schema`,
+		method: 'GET',
+	} ).then( response => {
+		form.wpcf7.schema = response;
+	} );
+
+	form.addEventListener( 'change', event => {
+		if ( event.target.closest( '.wpcf7-form-control' ) ) {
+			wpcf7.validate( form, { target: event.target } );
 		}
 	} );
 }
