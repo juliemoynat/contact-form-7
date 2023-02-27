@@ -10,9 +10,9 @@ Domain Path: /languages/
 Version: 5.6-a11y.1
 */
 
-define( 'WPCF7_VERSION', '5.6' );
+define( 'WPCF7_VERSION', '5.7.4' );
 
-define( 'WPCF7_REQUIRED_WP_VERSION', '5.9' );
+define( 'WPCF7_REQUIRED_WP_VERSION', '6.0' );
 
 define( 'WPCF7_TEXT_DOMAIN', 'contact-form-7' );
 
