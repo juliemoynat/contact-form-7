@@ -1,6 +1,1 @@
-<?php
-
-return array(
-	'dependencies' => array(),
-	'version' => WPCF7_VERSION,
-);
+<?php return array('dependencies' => array(), 'version' => '5498d8485d45996cd051');
