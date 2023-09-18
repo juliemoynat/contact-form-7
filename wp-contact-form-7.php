@@ -4,7 +4,7 @@
  * Plugin URI: https://contactform7.com/
  * Description: Just another contact form plugin. Simple but flexible.
  * Author: Takayuki Miyoshi, and modifications by: Tanaguru, Julie Moynat
- * Author URI: https://ideasilo.wordpress.com/
+ * Author URI: https://github.com/juliemoynat/contact-form-7/releases
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Version: 5.8-a11y.1
