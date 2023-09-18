@@ -3,7 +3,7 @@
  * Plugin Name: Contact Form 7 - Accessibility fixes
  * Plugin URI: https://contactform7.com/
  * Description: Just another contact form plugin. Simple but flexible.
- * Author: Takayuki Miyoshi, Tanaguru
+ * Author: Takayuki Miyoshi, and modifications by: Tanaguru, Julie Moynat
  * Author URI: https://ideasilo.wordpress.com/
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html

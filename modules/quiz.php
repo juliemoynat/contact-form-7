@@ -34,11 +34,11 @@ function wpcf7_quiz_form_tag_handler( $tag ) {
 	$atts = array();
 
 	/**
-	 * #cf7-tng-start
+	 * #cf7-a11y-start {Tanaguru}
 	 * Commenting this line adding a size attribute on fields (not allowed for accessibility reasons)
 	 */
 	// $atts['size'] = $tag->get_size_option( '40' );
-	/* #cf7-tng-end */
+	/** #cf7-a11y-end */
 	$atts['maxlength'] = $tag->get_maxlength_option();
 	$atts['minlength'] = $tag->get_minlength_option();
 

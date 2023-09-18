@@ -51,6 +51,15 @@ function wpcf7_acceptance_form_tag_handler( $tag ) {
 		'id' => $tag->get_id_option(),
 	);
 
+	/**
+	 * #cf7-a11y-start {JM}
+	 * If the field is not optional, it is required so add the `aria-required="true"` attribute.
+	 */
+	if ( !$tag->has_option( 'optional' ) ) {
+		$item_atts += [ 'aria-required' => 'true' ];
+	}
+	/** #cf7-a11y-end */
+
 	if ( $validation_error ) {
 		$item_atts['aria-invalid'] = 'true';
 		$item_atts['aria-describedby'] = wpcf7_get_validation_error_reference(
@@ -61,10 +70,16 @@ function wpcf7_acceptance_form_tag_handler( $tag ) {
 	}
 
 	/**
-	 * #cf7-tng-start
-	 * Add a variable to get the ID of the field and use it for the `<label>` tag if the ID is filled in the contact form administration
+	 * #cf7-a11y-start
+	 *
+	 * {Tanaguru}
+	 * - Add a variable to get the ID of the field and use it for the
+	 * `<label>` tag if the ID is filled in the contact form administration
+	 *
+	 * {JM}
+	 * - Use $item_atts['id'] instead of $tag->get_id_option()
 	 */
-	$item_atts_id = $tag->get_id_option();
+	$item_atts_id = $item_atts['id'];
 
 	if ( $item_atts_id != '' ) {
 		/** Add the `for` attribute on the `<label>` with the field ID as a value */
@@ -73,7 +88,7 @@ function wpcf7_acceptance_form_tag_handler( $tag ) {
 		/** No `for` attribute on the `<label>` */
 		$item_atts_id_for = '';
 	}
-	/* #cf7-tng-end */
+	/** #cf7-a11y-end */
 
 	$item_atts = wpcf7_format_atts( $item_atts );
 
@@ -99,14 +114,14 @@ function wpcf7_acceptance_form_tag_handler( $tag ) {
 		}
 
 		/**
-		 * #cf7-tng-start
+		 * #cf7-a11y-start {Tanaguru}
 		 * Add the `for` attribute on `<label>` to attach the label to its field.
 		 */
 		$html = sprintf(
 			'<span class="wpcf7-list-item"><label %1$s>%2$s</label></span>',
 			$item_atts_id_for, $html
 		);
-		/* #cf7-tng-end */
+		/** #cf7-a11y-end */
 
 	} else {
 		$html = sprintf(

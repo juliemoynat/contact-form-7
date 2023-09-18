@@ -131,34 +131,35 @@ export const setValidationError = ( form, fieldName, message, options ) => {
 	);
 
 	const setScreenReaderValidationError = () => {
-		const li = document.createElement( 'li' );
-
-		li.setAttribute( 'id', errorId );
-
-		if ( firstFoundControl && firstFoundControl.id ) {
-			li.insertAdjacentHTML(
-				'beforeend',
-				`<a href="#${ firstFoundControl.id }">${ message }</a>`
-			);
-		} else {
-			li.insertAdjacentText(
-				'beforeend',
-				message
-			);
-		}
 
 		/**
-		 * #cf7-tng-start
+		 * #cf7-a11y-start
 		 *
 		 * .screen-reader-response does not exist anymore.
 		 * See contact-form.php, function screen_reader_response.
 		 */
+		/** {JM} */
+		// const li = document.createElement( 'li' );
 
+		// li.setAttribute( 'id', errorId );
+
+		// if ( firstFoundControl && firstFoundControl.id ) {
+		// 	li.insertAdjacentHTML(
+		// 		'beforeend',
+		// 		`<a href="#${ firstFoundControl.id }">${ message }</a>`
+		// 	);
+		// } else {
+		// 	li.insertAdjacentText(
+		// 		'beforeend',
+		// 		message
+		// 	);
+		// }
+
+		/** {Tanaguru} */
 		// form.wpcf7.parent.querySelector(
 		// 	'.screen-reader-response ul'
 		// ).appendChild( li );
-
-		/** #cf7-tng-end */
+		/** #cf7-a11y-end */
 	};
 
 	const setVisualValidationError = () => {
@@ -176,20 +177,17 @@ export const setValidationError = ( form, fieldName, message, options ) => {
 			tip.classList.add( 'wpcf7-not-valid-tip' );
 
 			/**
-			 *? #cf7-tng-start
+			 * #cf7-a11y-start
 			 *
+			 * {Tanaguru}
 			 * - Comment `aria-hidden="true"` from the span element.
-			 * - Create errorID for random unique ID, and attach errorID to the error message.
+			 *
+			 * {JM}
+			 * - Add existing errorId to the error message.
 			 */
-
-			let errorID = 'cf7-tng-error-' + Math.random().toString(36).substr(2, 9);
-
 			// tip.setAttribute( 'aria-hidden', 'true' );
-			tip.setAttribute( 'id', errorID );
-
-			/**
-			 *? #cf7-tng-end
-			 */
+			tip.setAttribute( 'id', errorId );
+			/** #cf7-a11y-end */
 
 			tip.insertAdjacentText( 'beforeend', message );
 			wrap.appendChild( tip );
@@ -203,23 +201,28 @@ export const setValidationError = ( form, fieldName, message, options ) => {
 				control.setAttribute( 'aria-describedby', errorId );
 
 				/**
-				 *? #cf7-tng-start
+				 * #cf7-a11y-start
 				 *
+				 * {Tanaguru}
 				 * - Retrieve unique ID from error message and add `aria-describedby` to its field
 				 * - For `input[type="file"]`, handle it with `aria-labelledby` instead of `aria-describedby` because of a Firefox + NVDA bug
 				 * - Delete attribute aria-describedby for `input[type="file"]`
+				 *
+				 * {JM}
+				 * - For `fieldset` or `span` container, add `aria-describedby` on the fields inside and not on the container
+				 * - Use the existing errorId
 				 */
-
 				if ( control.type == 'file' ) {
-					control.setAttribute( 'aria-labelledby', control.getAttribute( 'aria-labelledby' ) + ' ' + errorID );
+					control.setAttribute( 'aria-labelledby', control.getAttribute( 'aria-labelledby' ) + ' ' + errorId );
 					control.removeAttribute( 'aria-describedby' );
+				} else if( control.nodeName.toLowerCase() == 'fieldset' || control.nodeName.toLowerCase() == 'span' ) {
+					control.querySelectorAll('input').forEach(input => {
+						input.setAttribute( 'aria-describedby', errorId );
+					});
 				} else {
-					control.setAttribute( 'aria-describedby', errorID );
+					control.setAttribute( 'aria-describedby', errorId );
 				}
-
-				/**
-				 *?  #cf7-tng-end
-				 */
+				/** #cf7-a11y-end */
 
 				if ( typeof control.setCustomValidity === 'function' ) {
 					control.setCustomValidity( message );
@@ -248,19 +251,15 @@ export const removeValidationError = ( form, fieldName ) => {
 		.replaceAll( /[^0-9a-z_-]+/ig, '' );
 
 	/**
-	 *? #cf7-tng-start
+	 * #cf7-a11y-start {Tanaguru}
 	 *
 	 * .screen-reader-response does not exist anymore.
 	 * See contact-form.php, function screen_reader_response.
 	 */
-
 	// form.wpcf7.parent.querySelector(
 	// 	`.screen-reader-response ul li#${ errorId }`
 	// )?.remove();
-
-	/**
-	 * ? #cf7-tng-end
-	 */
+	/** #cf7-a11y-end */
 
 	form.querySelectorAll(
 		`.wpcf7-form-control-wrap[data-name="${ fieldName }"]`
@@ -271,24 +270,24 @@ export const removeValidationError = ( form, fieldName ) => {
 			elm.setAttribute( 'aria-invalid', 'false' );
 
 			/**
-			 *? #cf7-tng-start
+			 * #cf7-a11y-start
 			 *
-			 * Remove the error message ID from the `aria-labelledby` attribute for `input[type="file"]`
+			 * {Tanaguru}
+			 * - Remove the error message ID from the `aria-labelledby` attribute for `input[type="file"]`
+			 *
+			 * {JM}
+			 * - Use the existing errorId
 			 */
-
 			if( elm.getAttribute( 'type' ) == 'file' ) {
 				let IDs = elm.getAttribute( 'aria-labelledby' );
 				IDs = IDs.split( ' ' );
 				IDs = IDs.filter( function ( ID ) {
-					return !/^cf7-tng-error-*/.test( ID );
+					return ID != errorId;
 				});
 
 				elm.setAttribute( 'aria-labelledby', IDs.join( ' ' ) );
 			}
-
-			/**
-			 *? #cf7-tng-end
-			 */
+			/** #cf7-a11y-end */
 		} );
 
 		wrap.querySelectorAll( '.wpcf7-form-control' ).forEach( control => {

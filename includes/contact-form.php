@@ -569,14 +569,13 @@ class WPCF7_ContactForm {
 				'dir' => wpcf7_is_rtl( $this->locale ) ? 'rtl' : 'ltr',
 			) )
 		);
-		/* #cf7-tng-end */
 
 		/**
-		 * #cf7-tng-start
+		 * #cf7-a11y-start {Tanaguru}
 		 * Removed creation of div.screen-reader-response
 		 */
 		// $html .= "\n" . $this->screen_reader_response() . "\n";
-		/* #cf7-tng-end */
+		/** #cf7-a11y-end */
 
 		$url = wpcf7_get_request_uri();
 
@@ -753,24 +752,24 @@ class WPCF7_ContactForm {
 		}
 
 		/**
-		 * #cf7-tng-start
+		 * #cf7-a11y-start {Tanaguru}
 		 * Comment `aria-hidden="true"` attribute because we move focus on the message on submit so it should not be hidden for screen readers
 		 */
 		$atts = array(
 			'class' => trim( $class ),
 			// 'aria-hidden' => 'true',
 		);
-		/* #cf7-tng-end */
+		/* #cf7-a11y-end */
 
 		/**
-		 * #cf7-tng-start
+		 * #cf7-a11y-start {Tanaguru}
 		 * Add tabindex="-1" attribute to be able to move focus on the message on submit
 		 */
 		$output = sprintf( '<div %1$s tabindex="-1">%2$s</div>',
 			wpcf7_format_atts( $atts ),
 			esc_html( $content )
 		);
-		/* #cf7-tng-end */
+		/* #cf7-a11y-end */
 
 		$output = apply_filters( 'wpcf7_form_response_output',
 			$output, $class, $content, $this, $status
@@ -782,12 +781,15 @@ class WPCF7_ContactForm {
 	}
 
 	/**
-	 * #cf7-tng-start
+	 * #cf7-a11y-start {Tanaguru}
 	 *
 	 * Removed screen_reader_response function.
 	 * The 'aria-describedby' attribute is planned to be used to
 	 * attach fields to their error message, leaving the use
 	 * of this container irrelevant.
+	 */
+	/**
+	 * Returns the response output that is only accessible from screen readers.
 	 */
 	// public function screen_reader_response() {
 	// 	$primary_response = '';
@@ -847,8 +849,7 @@ class WPCF7_ContactForm {
 
 	// 	return $output;
 	// }
-	/* #cf7-tng-end */
-
+	/* #cf7-a11y-end */
 
 	/**
 	 * Returns a validation error for the specified input field.
@@ -871,14 +872,14 @@ class WPCF7_ContactForm {
 		}
 
 		/**
-		 * #cf7-tng-start
+		 * #cf7-a11y-start {Tanaguru}
 		 * Comment `aria-hidden="true"` because each individual message is attached to its field with aria-describedby
 		 */
 		$atts = array(
 			'class' => 'wpcf7-not-valid-tip',
 			// 'aria-hidden' => 'true',
 		);
-		/* #cf7-tng-end */
+		/* #cf7-a11y-end */
 
 		$error = sprintf(
 			'<span %1$s>%2$s</span>',

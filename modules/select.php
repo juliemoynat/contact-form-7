@@ -58,7 +58,7 @@ function wpcf7_select_form_tag_handler( $tag ) {
 	$first_as_label = $tag->has_option( 'first_as_label' );
 
 	/**
-	 * #cf7-tng-start
+	 * #cf7-a11y-start {Tanaguru}
 	 * Commenting this line adding a size attribute on fields (not allowed for accessibility reasons)
 	 */
 	// if ( $tag->has_option( 'size' ) ) {
@@ -72,7 +72,7 @@ function wpcf7_select_form_tag_handler( $tag ) {
 	// 		$atts['size'] = 1;
 	// 	}
 	// }
-	/* #cf7-tng-end */
+	/** #cf7-a11y-end */
 
 	if ( $data = (array) $tag->get_data_option() ) {
 		$tag->values = array_merge( $tag->values, array_values( $data ) );
