@@ -21,8 +21,8 @@ As this fork is a fork of another fork, modifications will be tagged to be ident
 
 In the original Contact Form 7, when there are errors on submitting the form, there are two main message:
 
-- one is visually displayed and inaccessible to screen readers (it's a sentence to tell there are errors): that's a problem because people using screen readers are not all blind people;
-- the other is visually hidden and only accessible to screen reader users. This message contains links to anchors in the form. That's a problem because links are accessible through keyboard but not visible at all!
+- one is visually displayed and inaccessible to screen readers (it’s a sentence to tell there are errors): that’s a problem because people using screen readers are not all blind people;
+- the other is visually hidden and only accessible to screen reader users. This message contains links to anchors in the form. That’s a problem because links are accessible through keyboard but not visible at all!
 
 Both main error message or success message have a `role="alert"` attribute but this one is not ready in DOM before dynamically adding the message inside it. So, some screen readers may not read the message.
 
@@ -32,7 +32,7 @@ The main message should be at the top of the form to be logical.
 
 The focus has been moved on the main message (that must be at the top of the form) in order to be sure that the message will be read by screen readers and so, users are at the right place to go again inside the form to fix their errors.
 
-1. Move the `[response]` short code in our form administration at the top of the form (before writing fields) (**don't forget to do it as a developer**);
+1. Move the `[response]` short code in our form administration at the top of the form (before writing fields) (**don’t forget to do it as a developer**);
 1. Remove the `role="alert"` and `aria-hidden="true"` attribute from the main message container that is visible;
 1. Add a `tabindex="-1"`attribute on the main message container;
 1. Remove the visually hidden message (the one with links inside);
@@ -43,7 +43,7 @@ The focus has been moved on the main message (that must be at the top of the for
 
 In the original Contact Form 7, when there are errors on submitting the form, each field in error has a dedicated individual error message below it. These error messages have a `role="alert"` attribute and are not attached to their field so it remains difficult for blind users to access to these messages.
 
-Moreover, these individual messages are visually displayed and inaccessible to screen readers: that's a problem because people using screen readers are not all blind people.
+Moreover, these individual messages are visually displayed and inaccessible to screen readers: that’s a problem because people using screen readers are not all blind people.
 
 #### What have been done
 
@@ -53,7 +53,7 @@ Moreover, these individual messages are visually displayed and inaccessible to s
 
 ### 3. Remove `size` attribute on form fields {Tanaguru}
 
-A `size` attribute is used on form fields but it's not compliant with accessibility rules. CSS must be used instead in order to fix field size.
+A `size` attribute is used on form fields but it’s not compliant with accessibility rules. CSS must be used instead in order to fix field size.
 
 #### What have been done
 
@@ -61,7 +61,7 @@ Remove the `size` attribute from fields.
 
 ### 4. Add a `for` attribute on the `<label>` of the acceptance checkbox {Tanaguru}
 
-The acceptance checkbox (for GDPR) is a dedicated field in the contact form administration. In the code, you can't access to the `<label>` element so you can't attached the label to its field properly.
+The acceptance checkbox (for GDPR) is a dedicated field in the contact form administration. In the code, you can’t access to the `<label>` element so you can’t attached the label to its field properly.
 
 #### What have been done
 
@@ -69,9 +69,9 @@ Add a `for` attribute on the acceptance `<label>` only if the ID is filled in th
 
 ### 5. Error message on `input[type="file"]` field and the Firefox + NVDA bug {Tanaguru}
 
-On Firefox, the `aria-describedby` attribute doesn't work with the NVDA screen reader: it is not read.
+On Firefox, the `aria-describedby` attribute doesn’t work with the NVDA screen reader: it is not read.
 
-So, the fix we've done to link error messages to their field was not working for this kind of field with Firefox + NVDA.
+So, the fix we’ve done to link error messages to their field was not working for this kind of field with Firefox + NVDA.
 
 #### What have been done
 
@@ -82,13 +82,13 @@ This was a little bit complicated because we needed to link the `<label>` of the
 1. If the file field has **one** associated label (`for` / `id`) and has no `aria-labelledby` attribute:
     1. If the `<label>` has no `id`, add a unique ID on the `<label>` associated to the field;
     2. Add an `aria-labelledby` attribute on the field where its value is the ID of its label.
-2. If this is a file field, don't add an `aria-describedby` attribute on the field to link the error message but add the ID of the error message in the `aria-labelledby` attribute.
+2. If this is a file field, don’t add an `aria-describedby` attribute on the field to link the error message but add the ID of the error message in the `aria-labelledby` attribute.
 3. If this is a file field, remove only the ID of the error message from the `aria-labelledby` attribute when there is no error anymore.
 
 #### What you need to know in order to benefit from the fix
 
 1. Use only one `<label>` associated to the field (a field must not have several `<label>`);
-2. The `aria-labelledby` attribute is generated only if it is not present. Be careful if you're already using it: it must contain the ID of its associated `<label>`.
+2. The `aria-labelledby` attribute is generated only if it is not present. Be careful if you’re already using it: it must contain the ID of its associated `<label>`.
 
 ### 6. Add an `aria-required="true"` attribute on the `<input>` of the acceptance checkbox {JM}
 
@@ -123,7 +123,7 @@ This repository is a fork from a fork from the original plugin. The work is in p
 
 ### Using specific comment tags
 
-To make it easier to merge changes with new updates, we document our changes in the code. Make sure to wrap the section of code you've changed with the following comment tags:
+To make it easier to merge changes with new updates, changes in the code is documented. Make sure to wrap the section of code you’ve changed with the following comment tags:
 
 ```php
 /**
@@ -158,14 +158,14 @@ For example, this could look like this (this example is not taken from the origi
 
 ## How to update this fork from the original Contact Form 7 GitHub repository
 
-This fork is a fork from Tanaguru's one in order to keep historical changes but it must be up to date from the original Contact Form 7 repository and not from the Tanaguru's fork.
+This fork is a fork from Tanaguru’s one in order to keep historical changes but it must be up to date from the original Contact Form 7 repository and not from the Tanaguru’s fork.
 
 Follow these instructions to update this fork from the official Contact Form 7:
 
 1. Check that the `master` branch is up to date on your computer;
-1. Check that the `master` branch is up to date from the original forked repository. Github is telling you this information in the interface. If it's not up to date, [rebase it](https://stackoverflow.com/a/7244456):
+1. Check that the `master` branch is up to date from the original forked repository. Github is telling you this information in the interface. If it’s not up to date, [rebase it](https://stackoverflow.com/a/7244456):
 	```
-	# Make sure that you're on your master branch:
+	# Make sure that you’re on your master branch:
 
 	git checkout master
 
@@ -178,7 +178,7 @@ Follow these instructions to update this fork from the official Contact Form 7:
 	git fetch upstream
 
 	# Rewrite your master branch so that any commits of yours that
-	# aren't already in upstream/master are replayed on top of that
+	# aren’t already in upstream/master are replayed on top of that
 	# other branch:
 
 	git rebase upstream/master

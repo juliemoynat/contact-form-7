@@ -69,7 +69,6 @@ export default function submit( form, options = {} ) {
 		}
 
 		if ( 'mail_sent' === response.status ) {
-
 			/**
 			 * #cf7-a11y-start {Tanaguru}
 			 *

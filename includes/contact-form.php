@@ -784,7 +784,7 @@ class WPCF7_ContactForm {
 	 * #cf7-a11y-start {Tanaguru}
 	 *
 	 * Removed screen_reader_response function.
-	 * The 'aria-describedby' attribute is planned to be used to
+	 * The `aria-describedby` attribute is planned to be used to
 	 * attach fields to their error message, leaving the use
 	 * of this container irrelevant.
 	 */
@@ -825,8 +825,6 @@ class WPCF7_ContactForm {
 
 	// 					$validation_errors[] = $list_item;
 	// 				}
-
-	// 				$validation_errors[] = $list_item;
 	// 			}
 	// 		}
 	// 	}
@@ -873,7 +871,7 @@ class WPCF7_ContactForm {
 
 		/**
 		 * #cf7-a11y-start {Tanaguru}
-		 * Comment `aria-hidden="true"` because each individual message is attached to its field with aria-describedby
+		 * Comment `aria-hidden="true"` because each individual message is attached to its field with `aria-describedby`
 		 */
 		$atts = array(
 			'class' => 'wpcf7-not-valid-tip',

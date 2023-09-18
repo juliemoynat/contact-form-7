@@ -269,8 +269,6 @@ export const removeValidationError = ( form, fieldName ) => {
 		} );
 
 		wrap.querySelectorAll( '.wpcf7-form-control' ).forEach( control => {
-			control.removeAttribute( 'aria-describedby' );
-
 			/**
 			 * #cf7-a11y-start {JM}
 			 *
@@ -304,6 +302,7 @@ export const removeValidationError = ( form, fieldName ) => {
 			}
 			/** #cf7-a11y-end */
 
+			control.removeAttribute( 'aria-describedby' );
 			control.classList.remove( 'wpcf7-not-valid' );
 
 			if ( typeof control.setCustomValidity === 'function' ) {
