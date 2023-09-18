@@ -759,7 +759,7 @@ class WPCF7_ContactForm {
 			'class' => trim( $class ),
 			// 'aria-hidden' => 'true',
 		);
-		/* #cf7-a11y-end */
+		/** #cf7-a11y-end */
 
 		/**
 		 * #cf7-a11y-start {Tanaguru}
@@ -769,7 +769,7 @@ class WPCF7_ContactForm {
 			wpcf7_format_atts( $atts ),
 			esc_html( $content )
 		);
-		/* #cf7-a11y-end */
+		/** #cf7-a11y-end */
 
 		$output = apply_filters( 'wpcf7_form_response_output',
 			$output, $class, $content, $this, $status
@@ -849,7 +849,7 @@ class WPCF7_ContactForm {
 
 	// 	return $output;
 	// }
-	/* #cf7-a11y-end */
+	/** #cf7-a11y-end */
 
 	/**
 	 * Returns a validation error for the specified input field.
@@ -879,7 +879,7 @@ class WPCF7_ContactForm {
 			'class' => 'wpcf7-not-valid-tip',
 			// 'aria-hidden' => 'true',
 		);
-		/* #cf7-a11y-end */
+		/** #cf7-a11y-end */
 
 		$error = sprintf(
 			'<span %1$s>%2$s</span>',

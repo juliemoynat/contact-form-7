@@ -131,7 +131,6 @@ export const setValidationError = ( form, fieldName, message, options ) => {
 	);
 
 	const setScreenReaderValidationError = () => {
-
 		/**
 		 * #cf7-a11y-start
 		 *

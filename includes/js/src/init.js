@@ -11,7 +11,6 @@ import {
 } from './helpers';
 
 export default function init( form ) {
-
 	const formData = new FormData( form );
 
 	form.wpcf7 = {
@@ -43,7 +42,7 @@ export default function init( form ) {
 	 * Explanation: `aria-describedby` is not supported on this type of field with Firefox. And so, `aria-labelledby` will be used for the error message. So, we need to link the `<label>` with this attribute too so that it will not be erased.
 	 *
 	 * {JM}
-	 * - Rename "cf7-tng-label" into more generic "cf7-a11y-label"
+	 * - Rename "cf7-tng-label" into a more generic "cf7-a11y-label"
 	 */
 	form.querySelectorAll( '.wpcf7-file' ).forEach( field => {
 
