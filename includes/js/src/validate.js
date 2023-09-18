@@ -197,7 +197,6 @@ export const setValidationError = ( form, fieldName, message, options ) => {
 
 			wrap.querySelectorAll( '.wpcf7-form-control' ).forEach( control => {
 				control.classList.add( 'wpcf7-not-valid' );
-				control.setAttribute( 'aria-describedby', errorId );
 
 				/**
 				 * #cf7-a11y-start
@@ -267,6 +266,22 @@ export const removeValidationError = ( form, fieldName ) => {
 
 		wrap.querySelectorAll( '[aria-invalid]' ).forEach( elm => {
 			elm.setAttribute( 'aria-invalid', 'false' );
+		} );
+
+		wrap.querySelectorAll( '.wpcf7-form-control' ).forEach( control => {
+			control.removeAttribute( 'aria-describedby' );
+
+			/**
+			 * #cf7-a11y-start {JM}
+			 *
+			 * Remove `aria-describedby` attribute for fields inside a group of fields.
+			 */
+			if( control.nodeName.toLowerCase() == 'fieldset' || control.nodeName.toLowerCase() == 'span' ) {
+				control.querySelectorAll('input').forEach(input => {
+					input.removeAttribute( 'aria-describedby' );
+				});
+			}
+			/** #cf7-a11y-end */
 
 			/**
 			 * #cf7-a11y-start
@@ -276,21 +291,19 @@ export const removeValidationError = ( form, fieldName ) => {
 			 *
 			 * {JM}
 			 * - Use the existing errorId
+			 * - Move this code near the place where there is `aria-describedby` attribute removal and rename `elm` to `control`
 			 */
-			if( elm.getAttribute( 'type' ) == 'file' ) {
-				let IDs = elm.getAttribute( 'aria-labelledby' );
+			if( control.getAttribute( 'type' ) == 'file' ) {
+				let IDs = control.getAttribute( 'aria-labelledby' );
 				IDs = IDs.split( ' ' );
 				IDs = IDs.filter( function ( ID ) {
 					return ID != errorId;
 				});
 
-				elm.setAttribute( 'aria-labelledby', IDs.join( ' ' ) );
+				control.setAttribute( 'aria-labelledby', IDs.join( ' ' ) );
 			}
 			/** #cf7-a11y-end */
-		} );
 
-		wrap.querySelectorAll( '.wpcf7-form-control' ).forEach( control => {
-			control.removeAttribute( 'aria-describedby' );
 			control.classList.remove( 'wpcf7-not-valid' );
 
 			if ( typeof control.setCustomValidity === 'function' ) {
