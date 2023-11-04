@@ -115,6 +115,20 @@ Checkbox fields do not have IDs and their `label` have no `for` attribute.
 - Add a unique ID for each `checkbox`;
 - Add a `for` attribute for each `label` attached to its field.
 
+## Accessibility tips for Contact Form 7
+
+### Acceptance checkbox: a disabled button is not a good thing
+
+By default, adding an acceptance checkbox (a checkbox to let people give their consent about the website privacy policy) to a form is disabling the submit button until the user checks the checkbox.
+
+Disabled buttons are causing a lot of trouble. You can read [“Disabled buttons suck” on the Axess Lab blog](https://axesslab.com/disabled-buttons-suck/) to know why.
+
+In order to let the acceptance checkbox behave like the other fields, with an error message by clicking on the submit button if it's not checked, you will need to [add a piece of code in the additional settings of your form](https://contactform7.com/additional-settings/):
+
+```
+acceptance_as_validation: on
+```
+
 ## How to contribute?
 
 This fork must stay close to the evolving changes of the original plugin and so it must stay up to date.
