@@ -230,6 +230,8 @@ Follow these instructions to update this fork from the official Contact Form 7:
 
 ## How to use this plugin fork into your WordPress website
 
+### How to install this plugin fork the first time
+
 1. Download [the last release of this fork](https://github.com/juliemoynat/contact-form-7/releases);
 1. Into your `wp-content/plugins/` folder, create a new folder named `contact-form-7-a11y`;
 1. Extract the ZIP file of the release into this new folder (without the parent `contact-form-7` folder);
@@ -237,12 +239,25 @@ Follow these instructions to update this fork from the official Contact Form 7:
 	1. Go on [the official “Translating WordPress” page for Contact Form 7](https://translate.wordpress.org/projects/wp-plugins/contact-form-7/language-packs/) and download the translation files that you want;
 	1. Extract the files into your `wp-content/languages/plugins` folder.
 
-### Important note: No automatic updates
+### How to update this plugin fork on a website: ⚠️ No automatic updates
 
 1. This forked plugin is only available on GitHub so it will not benefit from automatic updates on your WordPress website.
 1. The translations will not benefit from automatic updates on your WordPress website either.
 
-**You will need to update the forked plugin and translations manually by repeating the steps detailed above.**
+**You will need to update the forked plugin and translations manually:**
+
+1. Download [the last release of this fork](https://github.com/juliemoynat/contact-form-7/releases);
+1. Put your website under maintenance;
+1. Into your `wp-content/plugins/contact-form-7-a11y` folder, remove all files.
+	
+	⚠️ **Do not remove the plugin from the WordPress administration or it will remove your forms!**;
+1. Extract the ZIP file of the release into this folder (without the parent `contact-form-7` folder);
+1. Get your language updates for this plugin fork:
+	1. Go on [the official “Translating WordPress” page for Contact Form 7](https://translate.wordpress.org/projects/wp-plugins/contact-form-7/language-packs/) and download the translation files that you want;
+	1. Extract the files into your `wp-content/languages/plugins` folder.
+1. Test your forms and if everything is OK, lift your website maintenance.
+
+#### Being notified about new releases
 
 If you have a GitHub account, you can **watch the GitHub repository** to be notified when a new release is available:
 
@@ -252,6 +267,8 @@ If you have a GitHub account, you can **watch the GitHub repository** to be noti
 1. Click on the “Apply” button;
 1. You will receive an email when a release is available.
 
-### Important note: Migration from the official Contact Form 7 plugin
+### Migration from the official Contact Form 7 plugin
 
 If you already have the original Contact Form 7 plugin installed, **don’t uninstall it** or you will loose your forms. **Just remove the plugin folder** in `wp-content/plugins/`. This plugin fork will use the forms that are already in your database.
+
+Then, follow the chapter “How to install this plugin fork the first time”.
