@@ -46,7 +46,7 @@ function wpcf7_text_form_tag_handler( $tag ) {
 	 */
 	// $atts['size'] = $tag->get_size_option( '40' );
 	/** #cf7-a11y-end */
-	$atts['maxlength'] = $tag->get_maxlength_option( '80' );
+	$atts['maxlength'] = $tag->get_maxlength_option( '400' );
 	$atts['minlength'] = $tag->get_minlength_option();
 
 	if ( $atts['maxlength'] and $atts['minlength']
@@ -161,7 +161,7 @@ function wpcf7_swv_add_text_rules( $schema, $contact_form ) {
 			);
 		}
 
-		if ( $maxlength = $tag->get_maxlength_option( '80' ) ) {
+		if ( $maxlength = $tag->get_maxlength_option( '400' ) ) {
 			$schema->add_rule(
 				wpcf7_swv_create_rule( 'maxlength', array(
 					'field' => $tag->name,
