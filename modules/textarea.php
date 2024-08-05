@@ -128,7 +128,17 @@ function wpcf7_swv_add_textarea_rules( $schema, $contact_form ) {
 			);
 		}
 
-		if ( $maxlength = $tag->get_maxlength_option( '2000' ) ) {
+		/**
+		 * #cf7-a11y-start {JM}
+		 * CF7 9.5.6 introduced a default max-length for text and textarea fields for antispam reasons (?) but it causes problems because it can't be unset. The developer doesn't want to add an option about this. See these tickets:
+		 * - https://github.com/rocklobster-in/contact-form-7/issues/1441
+		 * - https://github.com/rocklobster-in/contact-form-7/issues/1443
+		 * This fix remove the default max-length. It can be added for fields manually as usual but it is not set by default.
+		 */
+		// if ( $maxlength = $tag->get_maxlength_option( '2000' ) ) {
+		if ( $maxlength = $tag->get_maxlength_option() ) {
+		/** #cf7-a11y-end */
+
 			$schema->add_rule(
 				wpcf7_swv_create_rule( 'maxlength', array(
 					'field' => $tag->name,
