@@ -115,6 +115,17 @@ Checkbox fields do not have IDs and their `label` have no `for` attribute.
 - Add a unique ID for each `checkbox`;
 - Add a `for` attribute for each `label` attached to its field.
 
+### 9. Removing the default `max-length` forced on text and textarea fields since v9.5.6
+
+CF7 9.5.6 introduced a default `max-length` for text and textarea fields for antispam reasons (?) but it causes problems because it can't be unset and users are not aware about this attribute being set by default. People filling a form should be warned about the caracters limit on fields in the `label`.
+
+The developer doesn't want to add an option about this. See these tickets:
+
+- [Short default max-length for text and textarea fields in a minor version, #1441](https://github.com/rocklobster-in/contact-form-7/issues/1441)
+- [Add a filter to override maxlength limits added in v5.9.6, #1443](https://github.com/rocklobster-in/contact-form-7/issues/1443)
+
+This fix remove the default `max-length`. It can be added for fields manually as usual but it is not set by default.
+
 ## Accessibility tips for Contact Form 7
 
 ### Acceptance checkbox: a disabled button is not a good thing

@@ -46,7 +46,17 @@ function wpcf7_text_form_tag_handler( $tag ) {
 	 */
 	// $atts['size'] = $tag->get_size_option( '40' );
 	/** #cf7-a11y-end */
-	$atts['maxlength'] = $tag->get_maxlength_option( '400' );
+
+	/**
+	 * #cf7-a11y-start {JM}
+	 * CF7 9.5.6 introduced a default max-length for text and textarea fields for antispam reasons (?) but it causes problems because it can't be unset. The developer doesn't want to add an option about this. See these tickets:
+	 * - https://github.com/rocklobster-in/contact-form-7/issues/1441
+	 * - https://github.com/rocklobster-in/contact-form-7/issues/1443
+	 * This fix remove the default max-length. It can be added for fields manually as usual but it is not set by default.
+	 */
+	// $atts['maxlength'] = $tag->get_maxlength_option( '400' );
+	$atts['maxlength'] = $tag->get_maxlength_option();
+	/** #cf7-a11y-end */
 	$atts['minlength'] = $tag->get_minlength_option();
 
 	if ( $atts['maxlength'] and $atts['minlength']
