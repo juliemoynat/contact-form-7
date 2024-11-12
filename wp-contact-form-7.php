@@ -7,14 +7,14 @@
  * Author URI: https://github.com/juliemoynat/contact-form-7/releases
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Version: 5.9.8-a11y.2
- * Requires at least: 6.3
+ * Version: 6.0-a11y.1
+ * Requires at least: 6.6
  * Requires PHP: 7.4
  */
 
-define( 'WPCF7_VERSION', '5.9.8' );
+define( 'WPCF7_VERSION', '6.0' );
 
-define( 'WPCF7_REQUIRED_WP_VERSION', '6.3' );
+define( 'WPCF7_REQUIRED_WP_VERSION', '6.6' );
 
 define( 'WPCF7_TEXT_DOMAIN', 'contact-form-7' );
 
