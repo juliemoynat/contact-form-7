@@ -115,7 +115,7 @@ Checkbox fields do not have IDs and their `label` have no `for` attribute.
 - Add a unique ID for each `checkbox`;
 - Add a `for` attribute for each `label` attached to its field.
 
-### 9. Removing the default `max-length` forced on text and textarea fields since v9.5.6
+### 9. Removing the default `max-length` forced on text and textarea fields since v9.5.6 {JM}
 
 CF7 9.5.6 introduced a default `max-length` for text and textarea fields for antispam reasons (?) but it causes problems because it can't be unset and users are not aware about this attribute being set by default. People filling a form should be warned about the caracters limit on fields in the `label`.
 
@@ -125,6 +125,16 @@ The developer doesn't want to add an option about this. See these tickets:
 - [Add a filter to override maxlength limits added in v5.9.6, #1443](https://github.com/rocklobster-in/contact-form-7/issues/1443)
 
 This fix remove the default `max-length`. It can be added for fields manually as usual but it is not set by default.
+
+### 10. Removing the `aria-label` attribute on the `<form>` {JM}
+
+The `<form>` tag has an `aria-label` attribute with “Contact form” as a value. But the form is not always a contact form: it can be a newsletter subscription form or something else. It's better not to have an `aria-label` than having a wrong one.
+
+Moreover, the `aria-label` attribute is not useful here.
+
+#### What have been done
+
+The `aria-label` attribute on the `<form>` tag has been removed.
 
 ## Accessibility tips for Contact Form 7
 

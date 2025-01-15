@@ -647,8 +647,15 @@ class WPCF7_ContactForm {
 			'class' => ( '' !== $class ) ? $class : null,
 			'id' => ( '' !== $id_attr ) ? $id_attr : null,
 			'name' => ( '' !== $name_attr ) ? $name_attr : null,
-			'aria-label' => ( '' !== $title_attr )
-				? $title_attr : __( 'Contact form', 'contact-form-7' ),
+
+			/**
+			 * #cf7-a11y-start {JM}
+			 * The form is not always a contact form. It's better not to have an aria-label than having a wrong one. Moreover the aria-label attribute is not useful here.
+			 */
+			/*'aria-label' => ( '' !== $title_attr )
+				? $title_attr : __( 'Contact form', 'contact-form-7' ),*/
+			/** #cf7-a11y-end */
+
 			'enctype' => ( '' !== $enctype ) ? $enctype : null,
 			'autocomplete' => ( '' !== $autocomplete ) ? $autocomplete : null,
 			'novalidate' => true,
