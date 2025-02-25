@@ -32,7 +32,12 @@ function wpcf7_file_form_tag_handler( $tag ) {
 
 	$atts = array();
 
-	$atts['size'] = $tag->get_size_option( '40' );
+	/**
+	 * #cf7-a11y-start {Tanaguru}
+	 * Commenting this line adding a size attribute on fields (not allowed for accessibility reasons)
+	 */
+	// $atts['size'] = $tag->get_size_option( '40' );
+	/** #cf7-a11y-end */
 	$atts['class'] = $tag->get_class_option( $class );
 	$atts['id'] = $tag->get_id_option();
 	$atts['capture'] = $tag->get_option( 'capture', '(user|environment)', true );

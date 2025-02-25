@@ -107,11 +107,16 @@ document.addEventListener( 'DOMContentLoaded', event => {
 		};
 
 		const clearValidationErrors = () => {
-			screenReaderResponse.querySelectorAll(
-				`ul li#${ errorId }`
-			).forEach( li => {
-				li.remove();
-			} );
+			/**
+			 * #cf7-a11y-start {Tanaguru}
+			 * screen-reader-response remove in contact-form.php
+			 */
+			// screenReaderResponse.querySelectorAll(
+			// 	`ul li#${ errorId }`
+			// ).forEach( li => {
+			// 	li.remove();
+			// } );
+			/** #cf7-a11y-end */
 
 			wrap.querySelectorAll( '.wpcf7-not-valid-tip' ).forEach( span => {
 				span.remove();
@@ -152,7 +157,12 @@ document.addEventListener( 'DOMContentLoaded', event => {
 						message: event.error.message,
 					};
 
-					setScreenReaderValidationError( error );
+					/**
+					 * #cf7-a11y-start {Tanaguru}
+					 * screen-reader-response remove in contact-form.php
+					 */
+					// setScreenReaderValidationError( error );
+					/** #cf7-a11y-end */
 					setVisualValidationError( error );
 
 					button2.disabled = true;
@@ -202,7 +212,12 @@ document.addEventListener( 'DOMContentLoaded', event => {
 							message: result.error.message,
 						};
 
-						setScreenReaderValidationError( error );
+						/**
+						 * #cf7-a11y-start {Tanaguru}
+						 * screen-reader-response remove in contact-form.php
+						 */
+						// setScreenReaderValidationError( error );
+						/** #cf7-a11y-end */
 						setVisualValidationError( error );
 					} else if ( 'succeeded' === result.paymentIntent.status ) {
 						wpcf7.submit( form );

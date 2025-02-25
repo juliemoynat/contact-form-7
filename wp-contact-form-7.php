@@ -1,13 +1,13 @@
 <?php
 /*
- * Plugin Name: Contact Form 7
+ * Plugin Name: Contact Form 7 - Accessibility fixes
  * Plugin URI: https://contactform7.com/
  * Description: Just another contact form plugin. Simple but flexible.
- * Author: Takayuki Miyoshi
- * Author URI: https://ideasilo.wordpress.com/
+ * Author: Takayuki Miyoshi, and modifications by: Tanaguru, Julie Moynat
+ * Author URI: https://github.com/juliemoynat/contact-form-7/releases
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Version: 6.0.4
+ * Version: 6.0.4-a11y.1
  * Requires at least: 6.6
  * Requires PHP: 7.4
  */

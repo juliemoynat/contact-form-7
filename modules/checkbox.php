@@ -108,13 +108,22 @@ function wpcf7_checkbox_form_tag_handler( $tag ) {
 			$label = $value;
 		}
 
+		/**
+		 * #cf7-a11y-start {JM}
+		 * - Add a unique ID as attribute for fields.
+		 * - Add a variable for this unique ID to put it on `label`.
+		 */
 		$item_atts = array(
 			'type' => $tag->basetype,
 			'name' => $tag->name . ( $multiple ? '[]' : '' ),
 			'value' => $value,
 			'checked' => $checked,
 			'tabindex' => $tabindex,
+			'id' => $tag->get_id_option() . 'checkbox-' . wp_unique_id(),
 		);
+
+		$item_atts_id = $item_atts['id'];
+		/** #cf7-a11y-end */
 
 		$item_atts = wpcf7_format_atts( $item_atts );
 
@@ -132,9 +141,14 @@ function wpcf7_checkbox_form_tag_handler( $tag ) {
 			);
 		}
 
+		/**
+		 * #cf7-a11y-start {JM}
+		 * Add `for` attribute on the `label` with the ID of the field.
+		 */
 		if ( $use_label_element ) {
-			$item = '<label>' . $item . '</label>';
+			$item = '<label for="' . $item_atts_id . '">' . $item . '</label>';
 		}
+		/** #cf7-a11y-end */
 
 		if ( false !== $tabindex and 0 < $tabindex ) {
 			$tabindex += 1;
