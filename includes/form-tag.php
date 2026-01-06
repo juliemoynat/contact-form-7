@@ -20,8 +20,7 @@ class WPCF7_FormTag implements ArrayAccess {
 	public $content = '';
 
 	public function __construct( $tag = array() ) {
-		if ( is_array( $tag )
-		or $tag instanceof self ) {
+		if ( is_array( $tag ) or $tag instanceof self ) {
 			foreach ( $tag as $key => $value ) {
 				if ( property_exists( __CLASS__, $key ) ) {
 					$this->{$key} = $value;
@@ -159,6 +158,39 @@ class WPCF7_FormTag implements ArrayAccess {
 		}
 
 		return implode( ' ', $options );
+	}
+
+
+	/**
+	 * Retrieves the autocomplete option value from the form-tag.
+	 *
+	 * @return string|bool A whitespace-separated list of tokens.
+	 *                     False if there is no token to return.
+	 */
+	public function get_autocomplete_option() {
+		$options = (array) $this->get_option( 'autocomplete', '[-0-9a-zA-Z|]+' );
+
+		$options = array_reduce( $options, static function ( $carry, $item ) {
+			return array_merge( $carry,
+				array_map( 'strtolower', explode( '|', $item ) )
+			);
+		}, array() );
+
+		$options = array_filter( $options, static function ( $item ) {
+			return preg_match( '/^[a-z]+(?:-[0-9a-z]+)*$/', $item );
+		} );
+
+		$options = array_unique( $options );
+
+		if ( empty( $options ) ) {
+			return false;
+		} elseif ( in_array( 'off', $options, true ) ) {
+			return 'off';
+		} elseif ( in_array( 'on', $options, true ) ) {
+			return 'on';
+		} else {
+			return implode( ' ', $options );
+		}
 	}
 
 
@@ -307,8 +339,10 @@ class WPCF7_FormTag implements ArrayAccess {
 		if ( $date ) {
 			$date_pattern = '/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/';
 
-			if ( preg_match( $date_pattern, $date, $matches )
-			and checkdate( $matches[2], $matches[3], $matches[1] ) ) {
+			if (
+				preg_match( $date_pattern, $date, $matches ) and
+				checkdate( $matches[2], $matches[3], $matches[1] )
+			) {
 				return $date;
 			}
 		} else {
@@ -378,9 +412,11 @@ class WPCF7_FormTag implements ArrayAccess {
 					}
 				}
 
-			} elseif ( 'get' === $opt and isset( $_GET[$this->name] ) ) {
-				$vals = (array) $_GET[$this->name];
-				$vals = array_map( 'wpcf7_sanitize_query_var', $vals );
+			} elseif (
+				'get' === $opt and
+				$vals = wpcf7_superglobal_get( $this->name )
+			) {
+				$vals = array_map( 'wpcf7_sanitize_query_var', (array) $vals );
 
 				if ( $args['multiple'] ) {
 					$values = array_merge( $values, $vals );
@@ -392,9 +428,11 @@ class WPCF7_FormTag implements ArrayAccess {
 					}
 				}
 
-			} elseif ( 'post' === $opt and isset( $_POST[$this->name] ) ) {
-				$vals = (array) $_POST[$this->name];
-				$vals = array_map( 'wpcf7_sanitize_query_var', $vals );
+			} elseif (
+				'post' === $opt and
+				$vals = wpcf7_superglobal_post( $this->name )
+			) {
+				$vals = array_map( 'wpcf7_sanitize_query_var', (array) $vals );
 
 				if ( $args['multiple'] ) {
 					$values = array_merge( $values, $vals );

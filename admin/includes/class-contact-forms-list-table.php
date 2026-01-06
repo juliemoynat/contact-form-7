@@ -37,26 +37,19 @@ class WPCF7_Contact_Form_List_Table extends WP_List_Table {
 			'offset' => ( $this->get_pagenum() - 1 ) * $per_page,
 		);
 
-		if ( ! empty( $_REQUEST['s'] ) ) {
-			$args['s'] = $_REQUEST['s'];
+		if ( $search_keyword = wpcf7_superglobal_request( 's' ) ) {
+			$args['s'] = $search_keyword;
 		}
 
-		if ( ! empty( $_REQUEST['orderby'] ) ) {
-			if ( 'title' === $_REQUEST['orderby'] ) {
-				$args['orderby'] = 'title';
-			} elseif ( 'author' === $_REQUEST['orderby'] ) {
-				$args['orderby'] = 'author';
-			} elseif ( 'date' === $_REQUEST['orderby'] ) {
-				$args['orderby'] = 'date';
-			}
+		if ( $order_by = wpcf7_superglobal_request( 'orderby' ) ) {
+			$args['orderby'] = $order_by;
 		}
 
-		if ( ! empty( $_REQUEST['order'] ) ) {
-			if ( 'asc' === strtolower( $_REQUEST['order'] ) ) {
-				$args['order'] = 'ASC';
-			} elseif ( 'desc' === strtolower( $_REQUEST['order'] ) ) {
-				$args['order'] = 'DESC';
-			}
+		if (
+			$order = wpcf7_superglobal_request( 'order' ) and
+			'desc' === strtolower( $order )
+		) {
+			$args['order'] = 'DESC';
 		}
 
 		$this->items = WPCF7_ContactForm::find( $args );
@@ -213,10 +206,15 @@ class WPCF7_Contact_Form_List_Table extends WP_List_Table {
 		$output = '';
 
 		foreach ( $shortcodes as $shortcode ) {
-			$output .= "\n" . '<span class="shortcode"><input type="text"'
-				. ' onfocus="this.select();" readonly="readonly"'
-				. ' value="' . esc_attr( $shortcode ) . '"'
-				. ' class="large-text code" /></span>';
+			$output .= "\n" . sprintf(
+				'<span class="shortcode"><input %s /></span>',
+				wpcf7_format_atts( array(
+					'type' => 'text',
+					'readonly' => true,
+					'value' => $shortcode,
+					'class' => 'large-text code selectable',
+				) )
+			);
 		}
 
 		return trim( $output );

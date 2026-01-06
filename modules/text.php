@@ -59,8 +59,10 @@ function wpcf7_text_form_tag_handler( $tag ) {
 	/** #cf7-a11y-end */
 	$atts['minlength'] = $tag->get_minlength_option();
 
-	if ( $atts['maxlength'] and $atts['minlength']
-	and $atts['maxlength'] < $atts['minlength'] ) {
+	if (
+		$atts['maxlength'] and $atts['minlength'] and
+		$atts['maxlength'] < $atts['minlength']
+	) {
 		unset( $atts['maxlength'], $atts['minlength'] );
 	}
 
@@ -69,10 +71,7 @@ function wpcf7_text_form_tag_handler( $tag ) {
 	$atts['list'] = $tag->get_option( 'list', 'id', true );
 	$atts['tabindex'] = $tag->get_option( 'tabindex', 'signed_int', true );
 	$atts['readonly'] = $tag->has_option( 'readonly' );
-
-	$atts['autocomplete'] = $tag->get_option(
-		'autocomplete', '[-0-9a-zA-Z]+', true
-	);
+	$atts['autocomplete'] = $tag->get_autocomplete_option();
 
 	if ( $tag->is_required() ) {
 		$atts['aria-required'] = 'true';
@@ -89,8 +88,7 @@ function wpcf7_text_form_tag_handler( $tag ) {
 
 	$value = (string) reset( $tag->values );
 
-	if ( $tag->has_option( 'placeholder' )
-	or $tag->has_option( 'watermark' ) ) {
+	if ( $tag->has_option( 'placeholder' ) or $tag->has_option( 'watermark' ) ) {
 		$atts['placeholder'] = $value;
 		$value = '';
 	}
@@ -193,23 +191,23 @@ function wpcf7_text_messages( $messages ) {
 	$messages = array_merge( $messages, array(
 		'invalid_email' => array(
 			'description' =>
-				__( "Email address that the sender entered is invalid", 'contact-form-7' ),
+				__( 'Email address that the sender entered is invalid', 'contact-form-7' ),
 			'default' =>
-				__( "Please enter an email address.", 'contact-form-7' ),
+				__( 'Please enter an email address.', 'contact-form-7' ),
 		),
 
 		'invalid_url' => array(
 			'description' =>
-				__( "URL that the sender entered is invalid", 'contact-form-7' ),
+				__( 'URL that the sender entered is invalid', 'contact-form-7' ),
 			'default' =>
-				__( "Please enter a URL.", 'contact-form-7' ),
+				__( 'Please enter a URL.', 'contact-form-7' ),
 		),
 
 		'invalid_tel' => array(
 			'description' =>
-				__( "Telephone number that the sender entered is invalid", 'contact-form-7' ),
+				__( 'Telephone number that the sender entered is invalid', 'contact-form-7' ),
 			'default' =>
-				__( "Please enter a telephone number.", 'contact-form-7' ),
+				__( 'Please enter a telephone number.', 'contact-form-7' ),
 		),
 	) );
 
@@ -275,28 +273,33 @@ function wpcf7_tag_generator_text( $contact_form, $options ) {
 
 	$tgg = new WPCF7_TagGeneratorGenerator( $options['content'] );
 
-?>
-<header class="description-box">
-	<h3><?php
-		echo esc_html( $field_types[$basetype]['heading'] );
-	?></h3>
+	$formatter = new WPCF7_HTMLFormatter();
 
-	<p><?php
-		$description = wp_kses(
-			$field_types[$basetype]['description'],
-			array(
-				'a' => array( 'href' => true ),
-				'strong' => array(),
-			),
-			array( 'http', 'https' )
-		);
+	$formatter->append_start_tag( 'header', array(
+		'class' => 'description-box',
+	) );
 
-		echo $description;
-	?></p>
-</header>
+	$formatter->append_start_tag( 'h3' );
 
-<div class="control-box">
-	<?php
+	$formatter->append_preformatted(
+		esc_html( $field_types[$basetype]['heading'] )
+	);
+
+	$formatter->end_tag( 'h3' );
+
+	$formatter->append_start_tag( 'p' );
+
+	$formatter->append_preformatted(
+		wp_kses_data( $field_types[$basetype]['description'] )
+	);
+
+	$formatter->end_tag( 'header' );
+
+	$formatter->append_start_tag( 'div', array(
+		'class' => 'control-box',
+	) );
+
+	$formatter->call_user_func( static function () use ( $tgg, $field_types, $basetype ) {
 		$tgg->print( 'field_type', array(
 			'with_required' => true,
 			'select_options' => array(
@@ -319,15 +322,19 @@ function wpcf7_tag_generator_text( $contact_form, $options ) {
 		$tgg->print( 'default_value', array(
 			'with_placeholder' => true,
 		) );
-	?>
-</div>
+	} );
 
-<footer class="insert-box">
-	<?php
+	$formatter->end_tag( 'div' );
+
+	$formatter->append_start_tag( 'footer', array(
+		'class' => 'insert-box',
+	) );
+
+	$formatter->call_user_func( static function () use ( $tgg, $field_types ) {
 		$tgg->print( 'insert_box_content' );
 
 		$tgg->print( 'mail_tag_tip' );
-	?>
-</footer>
-<?php
+	} );
+
+	$formatter->print();
 }

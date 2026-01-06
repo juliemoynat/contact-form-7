@@ -76,12 +76,21 @@ document.addEventListener( 'DOMContentLoaded', event => {
 	} );
 
 	document.querySelectorAll(
-		'.contact-form-editor-box-mail span.mailtag'
+		'.contact-form-editor-box-mail span.mailtag, [data-tag-part="mail-tag"]'
 	).forEach( mailtag => {
 		mailtag.addEventListener( 'click', event => {
 			const range = document.createRange();
 			range.selectNodeContents( mailtag );
 			window.getSelection().addRange( range );
+		} );
+	} );
+
+	document.querySelectorAll(
+		'input.selectable'
+	).forEach( input => {
+		input.addEventListener( 'click', event => {
+			input.focus();
+			input.select();
 		} );
 	} );
 
@@ -96,7 +105,7 @@ document.addEventListener( 'DOMContentLoaded', event => {
 	} );
 
 	document.querySelectorAll(
-		'#wpcf7-ctct-enable-contact-list, #wpcf7-sendinblue-enable-contact-list, #wpcf7-sendinblue-enable-transactional-email'
+		'#wpcf7-sendinblue-enable-contact-list, #wpcf7-sendinblue-enable-transactional-email'
 	).forEach( checkbox => {
 		checkbox.addEventListener( 'change', event => {
 			if ( checkbox.checked ) {
