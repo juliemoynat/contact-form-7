@@ -136,6 +136,16 @@ Moreover, the `aria-label` attribute is not useful here.
 
 The `aria-label` attribute on the `<form>` tag has been removed.
 
+### 11. Replacing the `fieldset` element grouping the hidden fields by a `div` {JM}
+
+The hidden fields (`<input type="hidden">`) are grouped into a `fieldset` element but there is no sense in doing that because the fieldset is giving semantics where it should not have one.
+
+The CF7 CSS is hiding this fieldset with `display: none;` but if you don't use the CF7 CSS, the fieldset would be there.
+
+#### What have been done
+
+The `fieldset` element has been replaced by a `div`.
+
 ## Accessibility tips for Contact Form 7
 
 ### Acceptance checkbox: a disabled button is not a good thing

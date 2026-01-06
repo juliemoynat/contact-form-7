@@ -742,9 +742,16 @@ class WPCF7_ContactForm {
 
 		$formatter = new WPCF7_HTMLFormatter();
 
-		$formatter->append_start_tag( 'fieldset', array(
+		/**
+		 * #cf7-a11y-start {JM}
+		 * Replace the fieldset grouping hidden fields (nonsense) by a div
+		 * in case you don't use CF7 CSS.
+		 */
+		// $formatter->append_start_tag( 'fieldset', array(
+		$formatter->append_start_tag( 'div', array(
 			'class' => 'hidden-fields-container',
 		) );
+		/** #cf7-a11y-end */
 
 		foreach ( $hidden_fields as $name => $value ) {
 			$formatter->append_start_tag( 'input', array(

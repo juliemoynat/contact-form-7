@@ -7,7 +7,7 @@
  * Author URI: https://github.com/juliemoynat/contact-form-7/releases
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Version: 6.1.4-a11y.1
+ * Version: 6.1.4-a11y.2
  * Requires at least: 6.7
  * Requires PHP: 7.4
  */
